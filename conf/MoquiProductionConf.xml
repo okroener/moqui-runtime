@@ -12,8 +12,8 @@
         <!-- add datasource elements here to configure databases -->
 		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
 			<inline-jdbc pool-minsize="5" pool-maxsize="50">
-			<xa-properties user="root" password="start" pinGlobalTxToPhysicalConnection="true"
-                serverName="127.0.0.1" port="3306" databaseName="eq_exchange" autoReconnectForPools="true"
+			<xa-properties user="moqui" password="moqui1234!" pinGlobalTxToPhysicalConnection="true"
+                serverName="127.0.0.1" port="3306" databaseName="moqui" autoReconnectForPools="true"
                 useUnicode="true" encoding="UTF-8" useSSL="false" />
 			</inline-jdbc>
 		</datasource>

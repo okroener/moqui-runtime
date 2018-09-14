@@ -76,7 +76,7 @@
 			<inline-jdbc pool-minsize="5" pool-maxsize="50">
 			<xa-properties user="root" password="start" pinGlobalTxToPhysicalConnection="true"
                 serverName="127.0.0.1" port="3306" databaseName="eq_exchange" autoReconnectForPools="true"
-                useUnicode="true" encoding="UTF-8"/>
+                useUnicode="true" encoding="UTF-8" useSSL="false" />
 			</inline-jdbc>
 		</datasource>
     </entity-facade>

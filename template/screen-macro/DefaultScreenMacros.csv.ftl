@@ -32,6 +32,7 @@ along with this software (see the LICENSE.md file). If not, see
 <#-- ================ Section ================ -->
 <#macro section>${sri.renderSection(.node["@name"])}</#macro>
 <#macro "section-iterate">${sri.renderSection(.node["@name"])}</#macro>
+<#macro "section-include">${sri.renderSection(.node["@name"])}</#macro>
 
 <#-- ================ Containers ================ -->
 <#macro container><#recurse></#macro>
@@ -46,7 +47,7 @@ along with this software (see the LICENSE.md file). If not, see
     <#t><#if .node["panel-right"]?has_content><#recurse .node["panel-right"][0]></#if>
     <#t><#if .node["panel-footer"]?has_content><#recurse .node["panel-footer"][0]></#if>
 </#macro>
-<#macro "container-dialog"><#recurse></#macro>
+<#macro "container-dialog"><#-- do nothing, don't pull from container-dialog for CSV output --></#macro>
 
 <#-- ==================== Includes ==================== -->
 <#macro "include-screen">${sri.renderIncludeScreen(.node["@location"], .node["@share-scope"]!)}</#macro>
@@ -105,7 +106,16 @@ along with this software (see the LICENSE.md file). If not, see
 </#if></#macro>
 
 <#macro image><#-- do nothing for image, most likely part of screen and is funny in csv file: <@csvValue .node["@alt"]!"image"/> --></#macro>
-<#macro label><#-- do nothing for label, most likely part of screen and is funny in csv file: <#assign labelValue = ec.resource.expand(.node["@text"], "")><@csvValue labelValue/> --></#macro>
+<#macro label>
+    <#if .node["@condition"]?has_content><#assign conditionResult = ec.getResource().condition(.node["@condition"], "")><#else><#assign conditionResult = true></#if>
+    <#if conditionResult>
+        <#assign textMap = "">
+        <#if .node["@text-map"]?has_content><#assign textMap = ec.getResource().expression(.node["@text-map"], "")!></#if>
+        <#if textMap?has_content><#assign labelValue = ec.getResource().expand(.node["@text"], "", textMap)>
+        <#else><#assign labelValue = ec.getResource().expand(.node["@text"], "")/></#if>
+        <@csvValue labelValue/><#t>
+    </#if>
+</#macro>
 <#macro parameter><#-- do nothing, used directly in other elements --></#macro>
 
 

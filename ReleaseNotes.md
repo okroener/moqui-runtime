@@ -1,6 +1,49 @@
 
 # Moqui Runtime Release Notes
 
+## Release 2.1.3 - 07 Dec 2019
+
+Moqui Runtime 2.1.2 is a patch level new feature and bug fix release, in parallel with the release of Moqui Framework.
+
+There are only minor changes and fixes in this release. For a complete list of changes see:
+
+https://github.com/moqui/moqui-runtime/compare/v2.1.2...v2.1.3
+
+## Release 2.1.2 - 23 July 2019
+
+Moqui Runtime 2.1.2 is a patch level new feature and bug fix release, in parallel with the release of Moqui Framework.
+
+This release includes JavaScript library updates including Bootstrap 3.4.1, jQuery 3.4.1, jsTree 3.3.8, Moment.js 2.24.0, and Vue JS 2.6.10.
+This was done mainly for security reasons and updates to JS code in this repository have been done to fix issues from the updates.
+
+There are various improvements to System and Tools app screens for usability and to better handle larger databases.
+
+There are only minor changes and fixes in this release. For a complete list of changes see:
+
+https://github.com/moqui/moqui-runtime/compare/v2.1.1...v2.1.2
+
+## Release 2.1.1 - 29 Nov 2018
+
+Moqui Runtime 2.1.1 is a patch level new feature and bug fix release, in parallel with the release of Moqui Framework.
+
+In this release there are significant refinements and fixes for the Vue JS based vuet/vapps mode and it is now the default 
+(ie default under webroot is /vapps instead of /apps). The standard HTML mode is still available under /apps and there are still 
+links to switch on the app list screen. There is also now support for Vue component based XML Screens using a .js file and 
+optional .vuet file that gets merged into the Vue component as the template. For an example see the DynamicExampleItems.xml screen 
+in the example component.
+
+Moqui has an improved look and feel with simplified and less cluttered CSS styling. These changes are implemented as overrides in a 
+section at the bottom of webroot-theme.css so they can be easily changed or overridden. 
+
+QZ Tray is now supported (only in vuet mode, QZ connection maintained across screens) with a print options dialog in the header. 
+Screens can use QZ Tray in custom JavaScript to print, communicate with devices, etc. 
+
+Various screens in the System and Tools apps have been improved and modernized using newer XML Form functionality. There are also
+some improvements to work better in vuet/vapps mode (now the default).
+
+HTML and JavaScript generated for html and vuet render modes has a few output encoding fixes which fixes the rendering of screens 
+in various conditions (especially under vuet) for HTML and JS reserved characters, and for XSS mitigation.   
+
 ## Release 2.1.0 - 22 Oct 2017
 
 Moqui Runtime 2.1.0 is a major new feature and bug fix release, in parallel with the release of Moqui Framework.

@@ -185,7 +185,7 @@ task combineBaseJs(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
     dependsOn minifySelect2
     dependsOn minifyDateTimePicker
     dependsOn minifyMoquiLib
-    encoding = "ISO-8859-1"
+    encoding = "UTF-8"
     source = baseJs
     dest = file("${webrootPath}/js/CombinedBase.min.js")
 }

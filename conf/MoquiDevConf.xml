@@ -83,10 +83,10 @@
 
     <entity-facade query-stats="true">
         <!-- add datasource elements here to configure databases -->
-		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
+ 		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
 			<inline-jdbc pool-minsize="5" pool-maxsize="50">
 			<xa-properties user="root" password="start" pinGlobalTxToPhysicalConnection="true"
-                serverName="ubuntu-server" port="3306" databaseName="moqui_dev" autoReconnectForPools="true"
+                serverName="localhost" port="3306" databaseName="moqui3_prod_test" autoReconnectForPools="true"
                 useUnicode="true" encoding="UTF-8" useSSL="false" />
 			</inline-jdbc>
 		</datasource>

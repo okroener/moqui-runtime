@@ -10,10 +10,10 @@
     <!-- NOTE: using the environment variable is relatively secure in a container environment, but for more security set it here instead -->
     <entity-facade crypt-pass="${entity_ds_crypt_pass}" query-stats="true">
         <!-- add datasource elements here to configure databases -->
-		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
+ 		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
 			<inline-jdbc pool-minsize="5" pool-maxsize="50">
-			<xa-properties user="moqui" password="moqui1234!" pinGlobalTxToPhysicalConnection="true"
-                serverName="127.0.0.1" port="3306" databaseName="moqui" autoReconnectForPools="true"
+			<xa-properties user="moqui3_prod" password="C2pac23*" pinGlobalTxToPhysicalConnection="true"
+                serverName="localhost" port="3306" databaseName="moqui3_prod" autoReconnectForPools="true"
                 useUnicode="true" encoding="UTF-8" useSSL="false" />
 			</inline-jdbc>
 		</datasource>

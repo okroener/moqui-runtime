@@ -31,8 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
         if (validateScriptsOut.methodsLocation) html_scripts.add(validateScriptsOut.methodsLocation)
 
         String instancePurpose = System.getProperty("instance_purpose")
-		// changed to false since there is an issue with the compression 0f \u00a0 non breaking space
-        if (false && (!instancePurpose || instancePurpose == 'production')) {
+        if (!instancePurpose || instancePurpose == 'production') {
             /* ========== Production Mode ========== */
             footer_scripts.add('/js/CombinedVuet.min.js')
         } else {

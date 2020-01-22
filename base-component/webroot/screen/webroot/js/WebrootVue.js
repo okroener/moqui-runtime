@@ -44,6 +44,9 @@
    - goal would be to use FTL macros to transform more detailed XML into library specific output
  */
 
+// define nonbreaking space, because eriwen/gradle-js generated wrong code in minimizing
+char_0x00a0 = String.fromCharCode(0x00a0);
+
 // simple stub for define if it doesn't exist (ie no require.js, etc); mimic pattern of require.js define()
 if (!window.define) window.define = function(name, deps, callback) {
     if (!moqui.isString(name)) { callback = deps; deps = name; name = null; }
@@ -957,7 +960,7 @@ moqui.dateOffsets = [{id:'0',text:'This'},{id:'-1',text:'Last'},{id:'1',text:'Ne
     {id:'-2',text:'-2'},{id:'2',text:'+2'},{id:'-3',text:'-3'},{id:'-4',text:'-4'},{id:'-6',text:'-6'},{id:'-12',text:'-12'}];
 moqui.datePeriods = [{id:'day',text:'Day'},{id:'7d',text:'7 Days'},{id:'30d',text:'30 Days'},{id:'week',text:'Week'},{id:'weeks',text:'Weeks'},
     {id:'month',text:'Month'},{id:'months',text:'Months'},{id:'quarter',text:'Quarter'},{id:'year',text:'Year'},{id:'7r',text:'+/-7d'},{id:'30r',text:'+/-30d'}];
-moqui.emptyOpt = {id:'',text:'\u00a0'};
+moqui.emptyOpt = {id:'',text:char_0x00a0};
 Vue.component('date-period', {
     props: { name:{type:String,required:true}, id:String, allowEmpty:Boolean, offset:String, period:String, date:String,
         fromDate:String, thruDate:String, fromThruType:{type:String,'default':'date'}, form:String },
@@ -984,12 +987,12 @@ Vue.component('drop-down', {
     methods: {
         processOptionList: function(list, page, term) {
             var newData = [];
-            // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
-            if (this.allowEmpty && (!page || page <= 1) && (!term || term.trim() === '')) newData.push({ id:'\u00a0', text:'\u00a0' });
+            // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for &#xA0; only and set to null
+            if (this.allowEmpty && (!page || page <= 1) && (!term || term.trim() === '')) newData.push({ id:char_0x00a0, text:char_0x00a0 });
             var labelField = this.labelField; if (!labelField) { labelField = "label"; }
             var valueField = this.valueField; if (!valueField) { valueField = "value"; }
             $.each(list, function(idx, curObj) {
-                var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                var idVal = curObj[valueField]; if (!idVal) idVal = char_0x00a0;
                 newData.push({ id:idVal, text:curObj[labelField] })
             });
             return newData;
@@ -1001,7 +1004,7 @@ Vue.component('drop-down', {
             for (var parmName in parmMap) { if (parmMap.hasOwnProperty(parmName)) reqData[parmName] = parmMap[parmName]; }
             for (var doParm in dependsOnMap) { if (dependsOnMap.hasOwnProperty(doParm)) {
                 var doValue = $('#' + dependsOnMap[doParm]).val();
-                if (!doValue || doValue === "\u00a0") { hasAllParms = false; } else { reqData[doParm] = doValue; }
+                if (!doValue || doValue === char_0x00a0) { hasAllParms = false; } else { reqData[doParm] = doValue; }
             }}
             if (params) { reqData.term = params.term || ''; reqData.pageIndex = (params.page || 1) - 1; }
             else if (this.serverSearch) { reqData.term = ''; reqData.pageIndex = 0; }
@@ -1040,7 +1043,7 @@ Vue.component('drop-down', {
             jqEl.addClass("noResetSelect2"); // so doesn't get reset on container dialog load
         }
         if (this.options && this.options.length > 0) {
-            if (this.allowEmpty && this.multiple !== "multiple") opts.data = [{id:'',text:'\u00a0'}].concat(this.options);
+            if (this.allowEmpty && this.multiple !== "multiple") opts.data = [{id:'',text:char_0x00a0}].concat(this.options);
             else opts.data = this.options;
         }
         if (this.serverSearch) {

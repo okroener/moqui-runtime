@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- No copyright or license for configuration file, details here are not considered a creative work. -->
+
+<!-- NOTE: for default settings, examples, and comments see the MoquiDefaultConf.xml file at
+    https://github.com/moqui/moqui-framework/blob/master/framework/src/main/resources/MoquiDefaultConf.xml -->
+<moqui-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-2.1.xsd">
+
+    <server-stats stats-skip-condition="pathInfo?.startsWith('/rpc') || pathInfo?.startsWith('/rest') || pathInfo?.startsWith('/status')"/>
+
+    <!-- NOTE: using the environment variable is relatively secure in a container environment, but for more security set it here instead -->
+    <entity-facade crypt-pass="${entity_ds_crypt_pass}" query-stats="true">
+        <!-- add datasource elements here to configure databases -->
+ 		<datasource group-name="transactional" database-conf-name="mysql" schema-name="">
+			<inline-jdbc pool-minsize="5" pool-maxsize="50">
+			<xa-properties user="moqui3_prod" password="C2pac23*" pinGlobalTxToPhysicalConnection="true"
+                serverName="localhost" port="3306" databaseName="moqui3_prod" autoReconnectForPools="true"
+                useUnicode="true" encoding="UTF-8" useSSL="false" />
+			</inline-jdbc>
+		</datasource>
+    </entity-facade>
+</moqui-conf>
